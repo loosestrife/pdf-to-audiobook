@@ -1,9 +1,12 @@
+
+
 [project]
 name = "pdf-to-audiobook"
 version = "0.1.0"
 description = "Convert PDF books into high-quality audiobooks using Kokoro TTS"
 readme = "README.md"
-requires-python = ">=3.10.0"
+requires-python = ">=3.11, <3.12"
+
 dependencies = [
     "pymupdf>=1.25.0",
     "soundfile>=0.13.0",
@@ -13,8 +16,22 @@ dependencies = [
     "beautifulsoup4>=4.13.0",
     "lxml>=5.3.0",
     "kokoro>=0.9.0",
-    "torch>=2.6.0",
+    "torch==2.15.0.dev20260821+rocm7.2",
+    "torchvision==2.15.0.dev20260821+rocm7.2",
 ]
 
 [project.scripts]
 pdf-to-audiobook = "cli:main"
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/nightly/rocm6.2"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-rocm" }
+torchvision = { index = "pytorch-rocm" }
+pytorch-triton-rocm = { index = "pytorch-rocm" }
+
+[tool.taskipy.tasks]
+nougat = "uvx --with 'transformers<4.38.0' --with 'albumentations<1.4.0' --with 'pypdfium2>=4.0.0,<4.25.0' nougat"

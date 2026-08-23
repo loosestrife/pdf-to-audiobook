@@ -17,9 +17,7 @@ from src.pdf_extractor import (
 )
 from src.tts_generator import (
     generate_audiobook,
-    get_available_voices,
-    KokoroTTSGenerator,
-    TTSConfig
+    get_available_voices
 )
 
 
@@ -79,8 +77,6 @@ Examples:
 The text-to-speech engine should convert this text into natural sounding speech.
 We are testing with the Kokoro model."""
         
-        config = TTSConfig(voice=args.voice)
-        generator = KokoroTTSGenerator(config)
         
         os.makedirs(os.path.dirname(args.output), exist_ok=True)
         success = generator.generate_audio(test_text, args.output)
