@@ -4,8 +4,8 @@ version = "0.1.0"
 description = "Convert PDF books into high-quality audiobooks using Kokoro TTS"
 readme = "README.md"
 dependencies = [
-    "torch",
-    "torchvision",
+    "torch>=2.15.0.dev20260824",
+    "torchvision>=0.30.0.dev20260825",
     "pymupdf>=1.25.0",
     "soundfile>=0.13.0",
     "numpy>=1.26.0",
@@ -15,13 +15,15 @@ dependencies = [
     "lxml>=5.3.0",
     "kokoro>=0.9.0",
     "piper",
-    "qwen-tts"
+    "qwen-tts",
+    "taskipy>=1.14.1",
+    "chonkie>=1.7.0",
+    "ollama>=0.6.2",
 ]
 
 [[tool.uv.index]]
 name = "pytorch-rocm"
 url = "https://download.pytorch.org/whl/nightly/rocm7.2"
-explicit = true
 
 [tool.uv.sources]
 torch = { index = "pytorch-rocm" }
@@ -37,3 +39,4 @@ pdf-to-audiobook = "cli:main"
 [tool.taskipy.tasks]
 nougat = "uvx --python 3.11   --with 'transformers<4.36.0'   --with 'albumentations<1.4.0' --with 'pypdfium2>=4.0.0,<4.25.0'  --extra-index-url https://download.pytorch.org/whl/rocm7.2   --from nougat-ocr nougat pdfs/book.pdf -o mmd"
 make_wavs = "uv run python -m make_wavs"
+math2text = "uv run python -m math2text"

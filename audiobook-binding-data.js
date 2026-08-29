@@ -73,7 +73,6 @@ function generateAudiobookMetadata({inDir='.', outDir='.'}) {
 if(require.main == module){
   generateAudiobookMetadata()
   console.log(
-    'now do a ffmpeg -y -f concat -safe 0 -i list.txt -i FFMETADATAFILE -map_metadata 1 -c:a aac -b:a 64k output.m4b'
   );
 } else {
   module.exports = generateAudiobookMetadata();

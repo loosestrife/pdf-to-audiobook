@@ -6,8 +6,8 @@ from .math2text import math2text
 parser = argparse.ArgumentParser(
     description="Convert MathML/LaTeX documents to spoken text files for TTS."
 )
-parser.add_argument("input_mmd", type=Path, required=true, help="Path to input .mmd file")
-parser.add_argument("output_txt", type=Path, required=true, help="Path to output .txt file")
+parser.add_argument("input_mmd", type=Path, help="Path to input .mmd file")
+parser.add_argument("output_txt", type=Path, help="Path to output .txt file")
 parser.add_argument(
     "--num-chunks",
     type=int,
@@ -15,12 +15,6 @@ parser.add_argument(
     help="Number of chunks to split output into for Snakemake parallelization.",
 )
 args = parser.parse_args()
-
-def math2text(text: str) -> str:
-    """Placeholder for MathML/LaTeX to spoken text conversion."""
-    # Add your regex / cleaning rules here
-    return text
-
 
 def split_text_into_chunks(text: str, num_chunks: int) -> list[str]:
     """Splits text into N balanced parts without breaking sentences."""
